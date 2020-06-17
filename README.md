@@ -1,6 +1,32 @@
 # Nine and Line API Documentation
 
 
+## A Falcon Seed Project
+
+Nine and Line API uses Falcon, a web microframework written in Python. "Falcon follows the REST architectural style, 
+meaning (among other things) that you think in terms of resources and state transitions, 
+which map to HTTP verbs." - [http://falconframework.org/](http://falconframework.org/)
+
+* [https://github.com/falconry/falcon](https://github.com/falconry/falcon)
+* [http://falcon.readthedocs.org/en/latest/](http://falcon.readthedocs.org/en/latest/)
+
+
+## Table of Contents
+
+- [Admin Sequence Diagram](#admin-sequence-diagram)
+- [User Sequence Diagram](#user-sequence-diagram)
+- [Nine and Line Classifications](#nine-and-line-classifications)
+- [API Routes](#api-routes)
+
+
+### Admin Sequence Diagram
+![Admin Sequence Diagram](http://www.plantuml.com/plantuml/png/ZP71JiGW48RlF0KlOBnxCBl6usOl7ZnFONJ9Ka0OedrxST9CR7PRUYpvFlZpzL08CjNHAp0KipxQqGKrn1_zTed9VKpAHE_Ha8kXw7SS4dnYKQb9phW4WHWy9gSi40nGa0zUvm-5mUfs7LzvFhs0kRQJXNy-BUppwSPLl4e_FCi0_QJ1MaqPWHwjGz8fHriDAI4QFIzhy2seJQvMP_ogM4ZDv2p9-gNPq3o9ik1M7XEbf9OF_pyZExV6tMeSwxxpZSCbngjYX5afULyeKp2BNfoviRc5nooS1OBrVn3p7pj2gE3zjD9Vm1t5cTiTM-X-PncnMPQ9JancklsOwjGpjL0SzmKKjjzGqBqPHTXTKeoDc09rUWhMIoeWLpsqmphwNm00)
+
+
+### User Sequence Diagram
+![User Sequence Diagram](http://www.plantuml.com/plantuml/png/ZPInZjim38PtFOLUeEYUeKYBZaMNehYPbfb4Y2Ff93evl_rHFaCnOSNG5DZwIFty4kQO22ADjq618H_r_uHHTVv3_xluO4-JCduOq93rBkatx0ASCQd0DTRO08vcy6UmgWU23XBEBtul3mfThxdTtFBldrzWhlncNSzlrzNykAdDcVIt7-LwVT1tcomb_S2EFr6L4wQMF0p1I1TqV17a-3hY-uY9r08mAw9omPWlOYXE0Yw4w2xW5DWFbjOohCnHfRE4qjH41CBlWpzRbqUyU7zLcLXGcRZmOs29gDFaZ12IzJ4QMIV6hme6GTMyKcwbVMIoAbKG3KPdkb6feFUTYXWxGWMthrAGLOSICTwTRBnLBKBV9nsGj7KdN_gKM8VvpCInBqxgaJ8ctJsFIpV15HLy99s9InTeE-7o8odPNqvtHy9e7SJfnP0ChfY6OLTqoymItnrTq3iAnA9i9gp_3U5ZbjLRf5Jxfiz8Js1ZG6YzWnsW6r3mCgRSnGorhoB3xPl8SECYCjcoXuorhI63krieaBA5HtJzU1i-0G00)
+
+
 ### Nine and Line Classifications
 
 #### Pet Types
@@ -106,6 +132,12 @@ for any route that is accessed without proper Authorization.
 - [Update a customer address](#update-a-customer-address)
 - [Add a customer payment method](#add-a-customer-payment-method)
 
+#### Diet Approval
+- [Create a diet approval](#create-a-diet-approval)
+- [Get a diet approval list](#get-a-diet-approval-list)
+- [Get a diet approval](#get-a-diet-approval)
+- [Delete a diet approval](#delete-a-diet-approval)
+
 #### Mailing
 - [Add to mailing list](#add-to-mailing-list)
 
@@ -128,6 +160,7 @@ for any route that is accessed without proper Authorization.
 - [Get a product list](#get-a-product-list)
 - [Get a product detail](#get-a-product-detail)
 - [Get a list of product variants](#get-a-list-of-product-variants)
+- [Get product recommendations](#get-product-recommendations)
 
 #### Subscriptions
 - [Create a subscription](#create-a-subscription)
@@ -146,6 +179,7 @@ for any route that is accessed without proper Authorization.
 - [Delete a veterinarian](#delete-a-veterinarian)
 
 
+## Customer Routes
 
 ### Check email availability
 
@@ -199,6 +233,7 @@ for any route that is accessed without proper Authorization.
 
 
 ### Create a customer
+
 **POST:**
 ```
 /v1/customer
@@ -234,6 +269,7 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
 
 
 ### Get a customer
+
 **GET:**
 ```
 /v1/customer
@@ -271,6 +307,7 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
 
 
 ### Update a customer
+
 **PATCH:**
 ```
 /v1/customer
@@ -327,6 +364,7 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
 
 
 ### Create a customer address
+
 **POST:**
 ```
 /v1/customer/address
@@ -519,6 +557,126 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
 * `409` stripe issue
 
 
+## Diet Approval Routes
+
+### Create a diet approval
+
+**POST:**
+```
+/v1/diet-approval
+```
+
+**Notes:**
+* This route will create a veterinarian diet approval form for the veterinarian and send it to them.
+* Only call this route for therapeutic diets.
+
+
+**Body:**
+```json
+{
+	"line_item_id": 5119807946830,
+	"veterinarian_id": 1
+}
+```
+
+**Response:**
+```json
+{
+    "id": 44,
+    "customer_id": 3224454660174,
+    "pet_id": 1,
+    "veterinarian_id": 1,
+    "line_item_id": 5119807946830,
+    "status": "open",
+    "signed_at": null,
+    "created_at": "2020-06-07T19:23:29.157002",
+    "updated_at": "2020-06-07T19:23:29.157004"
+}
+```
+
+**Status Codes:**
+* `200` if successful
+* `400` if incorrect data provided or diet is non-therapeutic
+* `401` if invalid credentials
+* `409` if customer data is missing
+0
+
+
+### Get a diet approval list
+
+**GET:**
+```
+/v1/diet-approval
+```
+
+**Response:**
+```json
+[
+    {
+        "id": 44,
+        "customer_id": 3224454660174,
+        "pet_id": 1,
+        "veterinarian_id": 1,
+        "line_item_id": 5119807946830,
+        "status": "open",
+        "signed_at": null,
+        "created_at": "2020-06-07T19:23:29.157002",
+        "updated_at": "2020-06-07T19:23:29.157004"
+     },
+    ...
+]
+```
+
+**Status Codes:**
+* `200` if successful
+* `401` if invalid credentials
+
+
+### Get a diet approval
+
+**GET:**
+```
+/v1/diet-approval/:diet_approval_id
+```
+
+**Response:**
+```json
+
+{
+    "id": 44,
+    "customer_id": 3224454660174,
+    "pet_id": 1,
+    "veterinarian_id": 1,
+    "line_item_id": 5119807946830,
+    "status": "open",
+    "signed_at": null,
+    "created_at": "2020-06-07T19:23:29.157002",
+    "updated_at": "2020-06-07T19:23:29.157004"
+ }
+```
+
+**Status Codes:**
+* `200` if successful
+* `401` if invalid credentials
+
+
+### Delete a diet approval
+
+**DELETE:**
+```
+/v1/diet_approval/:diet_approval_id
+```
+
+**Response:** None
+
+**Status Codes:**
+* `204` if successful
+* `401` if invalid credentials
+* `404` if does not exist
+
+
+## Mailing List Routes
+
 ### Add to mailing list
 
 **POST:**
@@ -672,7 +830,7 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
 
 **GET:**
 ```
-/v1/order/:id
+/v1/order/:order_id
 ```
 
 **Response:**
@@ -833,7 +991,7 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
 
 **GET:**
 ```
-/v1/pet/:id
+/v1/pet/:pet_id
 ```
 
 **Response:**
@@ -867,7 +1025,7 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
 
 **PATCH:**
 ```
-/v1/pet/:id
+/v1/pet/:pet_id
 ```
 
 **Body:**
@@ -909,7 +1067,7 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
 
 **DELETE:**
 ```
-/v1/pet/:id
+/v1/pet/:pet_id
 ```
 
 **Response:** None
@@ -1002,15 +1160,10 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
 ```
 
 **Query Params:**
-* `pet-type`: value must either be `canine` or `feline` 
-* `tag`: a canine or feline health tag (multiple tags can exist)
+* `product-type`: the options are the same as `pet_type`, must either be `canine` or `feline` 
 
-Example: `/v1/product?tag=obesity&tag=cancer&tag=diabetes&pet-type=feline`
+Example: `/v1/product?product-type=feline`
 
-
-**Notes:**
-* Returns all products (unsorted) if no query params are specified 
-* If tags are provided, the product list will be sorted according to our ranking system
 
 **Response:**
 ```json
@@ -1184,6 +1337,92 @@ Example: `/v1/product/4590004666446/variant?weight=10`
 **Status Codes:**
 * `200` if successful
 * `400` if query params are not correct type
+
+
+### Get product recommendations
+
+**GET:**
+```
+/v1/product/recommendation/:product_type
+```
+
+**Query Params:**
+* `general`: a canine or feline general condition 
+* `medical`: a canine or feline medical condition
+
+Example: `/v1/product/recommendation/canine?general=vomiting&general=diarrhea&medical=cancer`
+
+
+**Notes:**
+* The `product_type` must either be `canine` or `feline` 
+* The response will contain two sorted lists, `recommendations` and `alternatives`. 
+
+**Response:**
+```json
+{
+    "recommendations": [
+        {
+            "id": 4490935369806,
+            "title": "Digestive Care - Chicken & White Rice",
+            "product_type": "canine",
+            "images": [
+                {
+                    "id": 14641718329422,
+                    "position": 1,
+                    "width": 263,
+                    "height": 242,
+                    "src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet.png?v=1587916291",
+                    "created_at": "2020-04-26T15:51:31.000000",
+                    "updated_at": "2020-04-26T15:51:31.000000"
+                }
+            ],
+            "is_prescribed": false,
+            "created_at": null,
+            "updated_at": "2020-06-14T18:38:00.000000"
+        }
+    ],
+    "alternatives": [
+        {
+            "id": 4490930159694,
+            "title": "Allergy Care - White Fish & Sweet Potato",
+            "product_type": "canine",
+            "images": [
+                {
+                    "id": 14641725440078,
+                    "position": 1,
+                    "width": 263,
+                    "height": 242,
+                    "src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_797a2cb7-b020-4532-b1f5-3fffc8968fb6.png?v=1587916371",
+                    "created_at": "2020-04-26T15:52:51.000000",
+                    "updated_at": "2020-04-26T15:52:51.000000"
+                }
+            ],
+            "is_prescribed": false,
+            "created_at": null,
+            "updated_at": "2020-06-14T18:37:25.000000"
+        },
+        {
+            "id": 4590005452878,
+            "title": "Low Fat Digestive Care",
+            "product_type": "canine",
+            "images": [
+                {
+                    "id": 14641722032206,
+                    "position": 1,
+                    "width": 263,
+                    "height": 242,
+                    "src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_41b19401-44bd-4e83-8bf9-4d45e816c260.png?v=1587916323",
+                    "created_at": "2020-04-26T15:52:03.000000",
+                    "updated_at": "2020-04-26T15:52:03.000000"
+                }
+            ],
+            "is_prescribed": true,
+            "created_at": null,
+            "updated_at": "2020-06-14T18:38:50.000000"
+        }
+    ]
+}
+```
 
 
 ### Create a subscription
