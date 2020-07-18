@@ -84,9 +84,11 @@ which map to HTTP verbs." - [http://falconframework.org/](http://falconframework
 * `high`
 
 #### Feline Body Levels
+* `very_small`,
 * `small`,
 * `medium`,
-* `large`
+* `large`,
+* `very_large`
 
 #### Feline General Conditions
 * `poor_hair_coat`,
@@ -164,12 +166,9 @@ for any route that is accessed without proper Authorization.
 
 #### Subscriptions
 - [Create a subscription](#create-a-subscription)
-- [Get a subscription list](#get-a-subscription-list)
-- [Get a subscription](#get-a-subscription)
-- [Delete a subscription](#delete-a-subscription)
 - [Get a subscription item list](#get-a-subscription-item-list)
 - [Get a subscription item](#get-a-subscription-item)
-- [Delete a subscription item](#delete-a-subscription-item)
+- [Cancel a subscription item](#cancel-a-subscription-item)
 
 #### Veterinarians
 - [Create a veterinarian](#create-a-veterinarian)
@@ -294,6 +293,7 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
     "orders_count": 1,
     "total_spent": 40.0,
     "verified_email": true,
+    "verified_payment_method": true,
     "accepts_marketing": false,
     "is_active": true,
     "created_at": "2020-05-16T16:31:49.323423",
@@ -335,6 +335,7 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
     "orders_count": 1,
     "total_spent": 40.0,
     "verified_email": true,
+    "verified_payment_method": true,
     "accepts_marketing": false,
     "is_active": true,
     "created_at": "2020-05-16T16:31:49.323423",
@@ -492,7 +493,7 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
 **Status Codes:**
 * `200` if successful
 * `401` if invalid credentials
-* `404` if address does not exist
+* `404` if does not exist
 
 
 ### Update a customer address
@@ -532,7 +533,7 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
 * `200` if successful
 * `400` if incorrect data provided
 * `401` if invalid credentials
-* `404` if address does not exist
+* `404` if does not exist
 
 
 ### Add a customer payment method
@@ -713,43 +714,57 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
 ```
 
 **Notes:**
-* The `payment_method` will be generated through stripe. 
+* This route will take a paid subscription and create a Shopify order to be processed
 
 
 **Body:**
 ```json
 {
-    "subscription_id": 1,
+	"subscription_id": 660517636861735
 }
 ```
 
 **Response:**
 ```json
 {
-    "id": 2430352654414,
-    "customer_id": 3314378113102,
+    "id": 2456682463310,
+    "customer_id": 3341083181134,
     "line_items": [
         {
-            "id": 5277104865358,
-            "order_id": 2430352654414,
+            "id": 5331236749390,
+            "order_id": 2456682463310,
+            "product": {
+                "id": 4590004666446,
+                "title": "Advanced Kidney Care",
+                "product_type": "canine",
+                "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_f8d62422-5aee-465e-8f79-7b486a2df200.png?v=1587916342",
+                "is_prescription": true,
+                "created_at": "2020-03-17T23:32:10.000000",
+                "updated_at": "2020-07-18T10:29:16.000000"
+            },
+            "variant": {
+                "id": 32204975833166,
+                "title": "40",
+                "price": 64.49,
+                "weight": 0.0,
+                "weight_unit": "lb",
+                "created_at": "2020-05-18T16:45:24.000000",
+                "updated_at": "2020-05-18T16:47:26.000000"
+            },
+            "price": 64.49,
+            "quantity": 1
+        },
+        {
+            "id": 5331236782158,
+            "order_id": 2456682463310,
             "product": {
                 "id": 4590005649486,
                 "title": "Allergy Care - Kangaroo",
                 "product_type": "canine",
-                "images": [
-                    {
-                        "id": 14641724850254,
-                        "position": 1,
-                        "width": 263,
-                        "height": 242,
-                        "src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_d2ded379-ae3c-456d-9328-18d8cf52e72a.png?v=1587916360",
-                        "created_at": "2020-04-26T15:52:40.000000",
-                        "updated_at": "2020-04-26T15:52:40.000000"
-                    }
-                ],
+                "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_d2ded379-ae3c-456d-9328-18d8cf52e72a.png?v=1587916360",
                 "is_prescription": true,
                 "created_at": "2020-03-17T23:36:02.000000",
-                "updated_at": "2020-07-06T22:48:12.000000"
+                "updated_at": "2020-07-18T10:29:31.000000"
             },
             "variant": {
                 "id": 32205011419214,
@@ -762,48 +777,14 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
             },
             "price": 64.49,
             "quantity": 1
-        },
-        {
-            "id": 5277104898126,
-            "order_id": 2430352654414,
-            "product": {
-                "id": 4490930159694,
-                "title": "Allergy Care - White Fish & Sweet Potato",
-                "product_type": "canine",
-                "images": [
-                    {
-                        "id": 14641725440078,
-                        "position": 1,
-                        "width": 263,
-                        "height": 242,
-                        "src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_797a2cb7-b020-4532-b1f5-3fffc8968fb6.png?v=1587916371",
-                        "created_at": "2020-04-26T15:52:51.000000",
-                        "updated_at": "2020-04-26T15:52:51.000000"
-                    }
-                ],
-                "is_prescription": false,
-                "created_at": "2020-01-04T19:00:21.000000",
-                "updated_at": "2020-07-06T22:48:24.000000"
-            },
-            "variant": {
-                "id": 31632976347214,
-                "title": "80",
-                "price": 99.49,
-                "weight": 0.0,
-                "weight_unit": "lb",
-                "created_at": "2020-01-04T19:00:22.000000",
-                "updated_at": "2020-05-18T17:08:57.000000"
-            },
-            "price": 99.49,
-            "quantity": 1
         }
     ],
-    "order_number": 1036,
+    "order_number": 1038,
     "note": null,
     "tags": null,
-    "subtotal_price": 163.98,
+    "subtotal_price": 128.98,
     "total_tax": 0.0,
-    "total_price": 163.98,
+    "total_price": 128.98,
     "currency": "USD",
     "financial_status": "paid",
     "fulfillment_status": null,
@@ -812,9 +793,9 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
     "cancelled_at": null,
     "closed_at": null,
     "processing_method": "",
-    "processed_at": "2020-07-06T18:56:33.000000",
-    "created_at": "2020-07-06T22:56:34.209347",
-    "updated_at": "2020-07-06T22:56:34.209352"
+    "processed_at": "2020-07-18T07:07:43.000000",
+    "created_at": "2020-07-18T11:07:43.796555",
+    "updated_at": "2020-07-18T11:07:43.796559"
 }
 ```
 
@@ -835,30 +816,44 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
 ```json
 [
     {
-        "id": 2430352654414,
-        "customer_id": 3314378113102,
+        "id": 2456682463310,
+        "customer_id": 3341083181134,
         "line_items": [
             {
-                "id": 5277104865358,
-                "order_id": 2430352654414,
+                "id": 5331236749390,
+                "order_id": 2456682463310,
+                "product": {
+                    "id": 4590004666446,
+                    "title": "Advanced Kidney Care",
+                    "product_type": "canine",
+                    "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_f8d62422-5aee-465e-8f79-7b486a2df200.png?v=1587916342",
+                    "is_prescription": true,
+                    "created_at": "2020-03-17T23:32:10.000000",
+                    "updated_at": "2020-07-18T11:10:49.000000"
+                },
+                "variant": {
+                    "id": 32204975833166,
+                    "title": "40",
+                    "price": 64.49,
+                    "weight": 0.0,
+                    "weight_unit": "lb",
+                    "created_at": "2020-05-18T16:45:24.000000",
+                    "updated_at": "2020-05-18T16:47:26.000000"
+                },
+                "price": 64.49,
+                "quantity": 1
+            },
+            {
+                "id": 5331236782158,
+                "order_id": 2456682463310,
                 "product": {
                     "id": 4590005649486,
                     "title": "Allergy Care - Kangaroo",
                     "product_type": "canine",
-                    "images": [
-                        {
-                            "id": 14641724850254,
-                            "position": 1,
-                            "width": 263,
-                            "height": 242,
-                            "src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_d2ded379-ae3c-456d-9328-18d8cf52e72a.png?v=1587916360",
-                            "created_at": "2020-04-26T15:52:40.000000",
-                            "updated_at": "2020-04-26T15:52:40.000000"
-                        }
-                    ],
+                    "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_d2ded379-ae3c-456d-9328-18d8cf52e72a.png?v=1587916360",
                     "is_prescription": true,
                     "created_at": "2020-03-17T23:36:02.000000",
-                    "updated_at": "2020-07-06T22:48:12.000000"
+                    "updated_at": "2020-07-18T11:10:49.000000"
                 },
                 "variant": {
                     "id": 32205011419214,
@@ -871,48 +866,14 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
                 },
                 "price": 64.49,
                 "quantity": 1
-            },
-            {
-                "id": 5277104898126,
-                "order_id": 2430352654414,
-                "product": {
-                    "id": 4490930159694,
-                    "title": "Allergy Care - White Fish & Sweet Potato",
-                    "product_type": "canine",
-                    "images": [
-                        {
-                            "id": 14641725440078,
-                            "position": 1,
-                            "width": 263,
-                            "height": 242,
-                            "src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_797a2cb7-b020-4532-b1f5-3fffc8968fb6.png?v=1587916371",
-                            "created_at": "2020-04-26T15:52:51.000000",
-                            "updated_at": "2020-04-26T15:52:51.000000"
-                        }
-                    ],
-                    "is_prescription": false,
-                    "created_at": "2020-01-04T19:00:21.000000",
-                    "updated_at": "2020-07-06T22:48:24.000000"
-                },
-                "variant": {
-                    "id": 31632976347214,
-                    "title": "80",
-                    "price": 99.49,
-                    "weight": 0.0,
-                    "weight_unit": "lb",
-                    "created_at": "2020-01-04T19:00:22.000000",
-                    "updated_at": "2020-05-18T17:08:57.000000"
-                },
-                "price": 99.49,
-                "quantity": 1
             }
         ],
-        "order_number": 1036,
+        "order_number": 1038,
         "note": null,
         "tags": null,
-        "subtotal_price": 163.98,
+        "subtotal_price": 128.98,
         "total_tax": 0.0,
-        "total_price": 163.98,
+        "total_price": 128.98,
         "currency": "USD",
         "financial_status": "paid",
         "fulfillment_status": null,
@@ -921,9 +882,9 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
         "cancelled_at": null,
         "closed_at": null,
         "processing_method": "",
-        "processed_at": "2020-07-06T18:56:33.000000",
-        "created_at": "2020-07-06T22:56:34.209347",
-        "updated_at": "2020-07-06T22:56:34.209352"
+        "processed_at": "2020-07-18T07:07:43.000000",
+        "created_at": "2020-07-18T11:07:43.796555",
+        "updated_at": "2020-07-18T11:07:43.796559"
     },
     ...
 ]
@@ -945,30 +906,44 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
 **Response:**
 ```json
 {
-    "id": 2430352654414,
-    "customer_id": 3314378113102,
+    "id": 2456682463310,
+    "customer_id": 3341083181134,
     "line_items": [
         {
-            "id": 5277104865358,
-            "order_id": 2430352654414,
+            "id": 5331236749390,
+            "order_id": 2456682463310,
+            "product": {
+                "id": 4590004666446,
+                "title": "Advanced Kidney Care",
+                "product_type": "canine",
+                "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_f8d62422-5aee-465e-8f79-7b486a2df200.png?v=1587916342",
+                "is_prescription": true,
+                "created_at": "2020-03-17T23:32:10.000000",
+                "updated_at": "2020-07-18T11:10:49.000000"
+            },
+            "variant": {
+                "id": 32204975833166,
+                "title": "40",
+                "price": 64.49,
+                "weight": 0.0,
+                "weight_unit": "lb",
+                "created_at": "2020-05-18T16:45:24.000000",
+                "updated_at": "2020-05-18T16:47:26.000000"
+            },
+            "price": 64.49,
+            "quantity": 1
+        },
+        {
+            "id": 5331236782158,
+            "order_id": 2456682463310,
             "product": {
                 "id": 4590005649486,
                 "title": "Allergy Care - Kangaroo",
                 "product_type": "canine",
-                "images": [
-                    {
-                        "id": 14641724850254,
-                        "position": 1,
-                        "width": 263,
-                        "height": 242,
-                        "src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_d2ded379-ae3c-456d-9328-18d8cf52e72a.png?v=1587916360",
-                        "created_at": "2020-04-26T15:52:40.000000",
-                        "updated_at": "2020-04-26T15:52:40.000000"
-                    }
-                ],
+                "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_d2ded379-ae3c-456d-9328-18d8cf52e72a.png?v=1587916360",
                 "is_prescription": true,
                 "created_at": "2020-03-17T23:36:02.000000",
-                "updated_at": "2020-07-06T22:48:12.000000"
+                "updated_at": "2020-07-18T11:10:49.000000"
             },
             "variant": {
                 "id": 32205011419214,
@@ -981,48 +956,14 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
             },
             "price": 64.49,
             "quantity": 1
-        },
-        {
-            "id": 5277104898126,
-            "order_id": 2430352654414,
-            "product": {
-                "id": 4490930159694,
-                "title": "Allergy Care - White Fish & Sweet Potato",
-                "product_type": "canine",
-                "images": [
-                    {
-                        "id": 14641725440078,
-                        "position": 1,
-                        "width": 263,
-                        "height": 242,
-                        "src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_797a2cb7-b020-4532-b1f5-3fffc8968fb6.png?v=1587916371",
-                        "created_at": "2020-04-26T15:52:51.000000",
-                        "updated_at": "2020-04-26T15:52:51.000000"
-                    }
-                ],
-                "is_prescription": false,
-                "created_at": "2020-01-04T19:00:21.000000",
-                "updated_at": "2020-07-06T22:48:24.000000"
-            },
-            "variant": {
-                "id": 31632976347214,
-                "title": "80",
-                "price": 99.49,
-                "weight": 0.0,
-                "weight_unit": "lb",
-                "created_at": "2020-01-04T19:00:22.000000",
-                "updated_at": "2020-05-18T17:08:57.000000"
-            },
-            "price": 99.49,
-            "quantity": 1
         }
     ],
-    "order_number": 1036,
+    "order_number": 1038,
     "note": null,
     "tags": null,
-    "subtotal_price": 163.98,
+    "subtotal_price": 128.98,
     "total_tax": 0.0,
-    "total_price": 163.98,
+    "total_price": 128.98,
     "currency": "USD",
     "financial_status": "paid",
     "fulfillment_status": null,
@@ -1031,16 +972,16 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
     "cancelled_at": null,
     "closed_at": null,
     "processing_method": "",
-    "processed_at": "2020-07-06T18:56:33.000000",
-    "created_at": "2020-07-06T22:56:34.209347",
-    "updated_at": "2020-07-06T22:56:34.209352"
+    "processed_at": "2020-07-18T07:07:43.000000",
+    "created_at": "2020-07-18T11:07:43.796555",
+    "updated_at": "2020-07-18T11:07:43.796559"
 }
 ```
 
 **Status Codes:**
 * `200` if successful
 * `401` if invalid credentials
-* `404` if pet does not exist
+* `404` if does not exist
 
 
 ### Create a pet
@@ -1182,7 +1123,7 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
 **Status Codes:**
 * `200` if successful
 * `401` if invalid credentials
-* `404` if pet does not exist
+* `404` if does not exist
 
 
 ### Update a pet
@@ -1333,42 +1274,22 @@ Example: `/v1/product?product-type=feline`
 ```json
 [
     {
+        "id": 4490930159694,
+        "title": "Allergy Care - White Fish & Sweet Potato",
+        "product_type": "canine",
+        "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_797a2cb7-b020-4532-b1f5-3fffc8968fb6.png?v=1587916371",
+        "is_prescription": false,
+        "created_at": "2020-01-04T19:00:21.000000",
+        "updated_at": "2020-07-12T19:51:35.000000"
+    },
+    {
         "id": 4590004666446,
         "title": "Advanced Kidney Care",
         "product_type": "canine",
-        "images": [
-            {
-                "id": 14641723080782,
-                "position": 1,
-                "width": 263,
-                "height": 242,
-                "src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_f8d62422-5aee-465e-8f79-7b486a2df200.png?v=1587916342",
-                "created_at": "2020-04-26T15:52:22.000000",
-                "updated_at": "2020-04-26T15:52:22.000000"
-            }
-        ],
+        "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_f8d62422-5aee-465e-8f79-7b486a2df200.png?v=1587916342",
         "is_prescription": true,
         "created_at": "2020-03-17T23:32:10.000000",
-        "updated_at": "2020-05-27T01:17:06.000000"
-    },
-    {
-        "id": 4590009942094,
-        "title": "Allergy Care - Kangaroo",
-        "product_type": "feline",
-        "images": [
-            {
-                "id": 14641710071886,
-                "position": 1,
-                "width": 536,
-                "height": 540,
-                "src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/example_diet_a723a3f7-1dd4-488a-9bce-ef2609c5cd45.png?v=1587916170",
-                "created_at": "2020-04-26T15:49:30.000000",
-                "updated_at": "2020-04-26T15:49:30.000000"
-            }
-        ],
-        "is_prescription": true,
-        "created_at": "2020-03-17T23:49:30.000000",
-        "updated_at": "2020-05-27T00:28:36.000000"
+        "updated_at": "2020-07-12T19:51:58.000000"
     },
     ...
 ]
@@ -1392,20 +1313,10 @@ Example: `/v1/product?product-type=feline`
     "id": 4590004666446,
     "title": "Advanced Kidney Care",
     "product_type": "canine",
-    "images": [
-        {
-            "id": 14641723080782,
-            "position": 1,
-            "width": 263,
-            "height": 242,
-            "src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_f8d62422-5aee-465e-8f79-7b486a2df200.png?v=1587916342",
-            "created_at": "2020-04-26T15:52:22.000000",
-            "updated_at": "2020-04-26T15:52:22.000000"
-        }
-    ],
+    "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_f8d62422-5aee-465e-8f79-7b486a2df200.png?v=1587916342",
     "is_prescription": true,
     "created_at": "2020-03-17T23:32:10.000000",
-    "updated_at": "2020-05-27T01:17:06.000000",
+    "updated_at": "2020-07-18T11:10:49.000000",
     "general_description": "A diet low in protein, phosphorus, and sodium to help support dogs with advanced (IRIS Stage 3-4) kidney disease.",
     "key_features": [
         "Restricted in protein, phosphorus, and sodium",
@@ -1453,7 +1364,7 @@ Example: `/v1/product?product-type=feline`
 **Status Codes:**
 * `200` if successful
 * `400` if query params are not correct type
-* `404` if product not found
+* `404` if not found
 
 
 ### Get a list of product variants
@@ -1526,64 +1437,27 @@ Example: `/v1/product/recommendation/canine?general=vomiting&general=diarrhea&me
 {
     "recommendations": [
         {
-            "id": 4490935369806,
-            "title": "Digestive Care - Chicken & White Rice",
+            "id": 4590005649486,
+            "title": "Allergy Care - Kangaroo",
             "product_type": "canine",
-            "images": [
-                {
-                    "id": 14641718329422,
-                    "position": 1,
-                    "width": 263,
-                    "height": 242,
-                    "src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet.png?v=1587916291",
-                    "created_at": "2020-04-26T15:51:31.000000",
-                    "updated_at": "2020-04-26T15:51:31.000000"
-                }
-            ],
-            "is_prescription": false,
-            "created_at": null,
-            "updated_at": "2020-06-14T18:38:00.000000"
-        }
+            "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_d2ded379-ae3c-456d-9328-18d8cf52e72a.png?v=1587916360",
+            "is_prescription": true,
+            "created_at": "2020-03-17T23:36:02.000000",
+            "updated_at": "2020-07-10T21:54:26.000000"
+        },
+        ...
     ],
     "alternatives": [
         {
             "id": 4490930159694,
             "title": "Allergy Care - White Fish & Sweet Potato",
             "product_type": "canine",
-            "images": [
-                {
-                    "id": 14641725440078,
-                    "position": 1,
-                    "width": 263,
-                    "height": 242,
-                    "src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_797a2cb7-b020-4532-b1f5-3fffc8968fb6.png?v=1587916371",
-                    "created_at": "2020-04-26T15:52:51.000000",
-                    "updated_at": "2020-04-26T15:52:51.000000"
-                }
-            ],
+            "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_797a2cb7-b020-4532-b1f5-3fffc8968fb6.png?v=1587916371",
             "is_prescription": false,
-            "created_at": null,
-            "updated_at": "2020-06-14T18:37:25.000000"
+            "created_at": "2020-01-04T19:00:21.000000",
+            "updated_at": "2020-07-12T19:51:35.000000"
         },
-        {
-            "id": 4590005452878,
-            "title": "Low Fat Digestive Care",
-            "product_type": "canine",
-            "images": [
-                {
-                    "id": 14641722032206,
-                    "position": 1,
-                    "width": 263,
-                    "height": 242,
-                    "src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_41b19401-44bd-4e83-8bf9-4d45e816c260.png?v=1587916323",
-                    "created_at": "2020-04-26T15:52:03.000000",
-                    "updated_at": "2020-04-26T15:52:03.000000"
-                }
-            ],
-            "is_prescription": true,
-            "created_at": null,
-            "updated_at": "2020-06-14T18:38:50.000000"
-        }
+        ...
     ]
 }
 ```
@@ -1597,20 +1471,22 @@ Example: `/v1/product/recommendation/canine?general=vomiting&general=diarrhea&me
 ```
 
 **Notes:**
-* This route will create a customer subscription through stripe
+* A pet cannot have an existing active subscription 
+* Multiple line items with the same `pet_id` are not allowed.
+* A customer must have a `payment_method` added 
 
 
 **Body:**
 ```json
 {
-	"line_items": [
-		{
-			"pet_id": 1,
-			"variant_id": 32205011419214
-		},
+	"items": [
 		{
 			"pet_id": 2,
-			"variant_id": 31632976347214
+			"variant_id": 32204975833166
+		},
+		{
+			"pet_id": 3,
+			"variant_id": 32205011419214
 		}
 	]
 }
@@ -1619,44 +1495,67 @@ Example: `/v1/product/recommendation/canine?general=vomiting&general=diarrhea&me
 **Response:**
 ```json
 {
-    "id": 1,
-    "customer_id": 3314378113102,
+    "id": 660517636861735,
+    "customer_id": 3341083181134,
     "cancel_at_period_end": false,
-    "current_period_start": "2020-07-06T22:53:47.000000",
-    "current_period_end": "2020-07-20T22:53:47.000000",
+    "current_period_start": "2020-07-18T11:07:11.000000",
+    "current_period_end": "2020-08-01T11:07:11.000000",
     "items": [
         {
-            "id": 1,
-            "subscription_id": 1,
-            "pet_name": "Tony",
-            "product_id": 4590005649486,
-            "variant_id": 32205011419214,
+            "id": 129177802981270,
+            "subscription_id": 660517636861735,
+            "pet_name": "Gordo",
+            "product": {
+                "id": 4590004666446,
+                "title": "Advanced Kidney Care",
+                "product_type": "canine",
+                "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_f8d62422-5aee-465e-8f79-7b486a2df200.png?v=1587916342",
+                "is_prescription": true,
+                "created_at": "2020-03-17T23:32:10.000000",
+                "updated_at": "2020-07-18T10:29:16.000000"
+            },
             "amount": 64.49,
             "currency": "usd",
             "interval": "week",
             "interval_count": 2,
+            "quantity": 1,
+            "cancel_at_period_end": false,
+            "current_period_start": "2020-07-18T11:07:11.000000",
+            "current_period_end": "2020-08-01T11:07:11.000000",
             "is_active": true,
-            "created_at": "2020-07-06T22:53:48.989549",
-            "updated_at": "2020-07-06T22:53:48.989558"
+            "created_at": "2020-07-18T11:07:12.714361",
+            "updated_at": "2020-07-18T11:07:12.714369"
         },
         {
-            "id": 2,
-            "subscription_id": 1,
-            "pet_name": "Indy",
-            "product_id": 4490930159694,
-            "variant_id": 31632976347214,
-            "amount": 99.49,
+            "id": 548021379723503,
+            "subscription_id": 660517636861735,
+            "pet_name": "Tony",
+            "product": {
+                "id": 4590005649486,
+                "title": "Allergy Care - Kangaroo",
+                "product_type": "canine",
+                "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_d2ded379-ae3c-456d-9328-18d8cf52e72a.png?v=1587916360",
+                "is_prescription": true,
+                "created_at": "2020-03-17T23:36:02.000000",
+                "updated_at": "2020-07-18T10:29:31.000000"
+            },
+            "amount": 64.49,
             "currency": "usd",
             "interval": "week",
             "interval_count": 2,
+            "quantity": 1,
+            "cancel_at_period_end": false,
+            "current_period_start": "2020-07-18T11:07:11.000000",
+            "current_period_end": "2020-08-01T11:07:11.000000",
             "is_active": true,
-            "created_at": "2020-07-06T22:53:48.990189",
-            "updated_at": "2020-07-06T22:53:48.990194"
+            "created_at": "2020-07-18T11:07:12.714837",
+            "updated_at": "2020-07-18T11:07:12.714840"
         }
     ],
     "status": "active",
-    "created_at": "2020-07-06T22:53:48.990568",
-    "updated_at": "2020-07-06T22:53:48.990571"
+    "is_active": true,
+    "created_at": "2020-07-18T11:07:12.715114",
+    "updated_at": "2020-07-18T11:07:12.715116"
 }
 ```
 
@@ -1667,180 +1566,67 @@ Example: `/v1/product/recommendation/canine?general=vomiting&general=diarrhea&me
 * `409` if a pet already has a subscription
 
 
-### Get a subscription list
-
-**GET:**
-```
-/v1/subscription
-```
-
-**Response:**
-```json
-[
-    {
-        "id": 1,
-        "customer_id": 3314378113102,
-        "cancel_at_period_end": false,
-        "current_period_start": "2020-07-06T22:53:47.000000",
-        "current_period_end": "2020-07-20T22:53:47.000000",
-        "items": [
-            {
-                "id": 1,
-                "subscription_id": 1,
-                "pet_name": "Tony",
-                "product_id": 4590005649486,
-                "variant_id": 32205011419214,
-                "amount": 64.49,
-                "currency": "usd",
-                "interval": "week",
-                "interval_count": 2,
-                "is_active": true,
-                "created_at": "2020-07-06T22:53:48.989549",
-                "updated_at": "2020-07-06T22:53:48.989558"
-            },
-            {
-                "id": 2,
-                "subscription_id": 1,
-                "pet_name": "Indy",
-                "product_id": 4490930159694,
-                "variant_id": 31632976347214,
-                "amount": 99.49,
-                "currency": "usd",
-                "interval": "week",
-                "interval_count": 2,
-                "is_active": true,
-                "created_at": "2020-07-06T22:53:48.990189",
-                "updated_at": "2020-07-06T22:53:48.990194"
-            }
-        ],
-        "status": "active",
-        "created_at": "2020-07-06T22:53:48.990568",
-        "updated_at": "2020-07-06T22:53:48.990571"
-    },
-    ...
-]
-```
-
-**Status Codes:**
-* `200` if successful
-* `401` if invalid credentials
-
-
-### Get a subscription
-
-**GET:**
-```
-/v1/subscription/:subscription_id
-```
-
-**Response:**
-```json
-{
-    "id": 1,
-    "customer_id": 3314378113102,
-    "cancel_at_period_end": false,
-    "current_period_start": "2020-07-06T22:53:47.000000",
-    "current_period_end": "2020-07-20T22:53:47.000000",
-    "items": [
-        {
-            "id": 1,
-            "subscription_id": 1,
-            "pet_name": "Tony",
-            "product_id": 4590005649486,
-            "variant_id": 32205011419214,
-            "amount": 64.49,
-            "currency": "usd",
-            "interval": "week",
-            "interval_count": 2,
-            "is_active": true,
-            "created_at": "2020-07-06T22:53:48.989549",
-            "updated_at": "2020-07-06T22:53:48.989558"
-        },
-        {
-            "id": 2,
-            "subscription_id": 1,
-            "pet_name": "Indy",
-            "product_id": 4490930159694,
-            "variant_id": 31632976347214,
-            "amount": 99.49,
-            "currency": "usd",
-            "interval": "week",
-            "interval_count": 2,
-            "is_active": true,
-            "created_at": "2020-07-06T22:53:48.990189",
-            "updated_at": "2020-07-06T22:53:48.990194"
-        }
-    ],
-    "status": "active",
-    "created_at": "2020-07-06T22:53:48.990568",
-    "updated_at": "2020-07-06T22:53:48.990571"
-}
-```
-
-**Status Codes:**
-* `200` if successful
-* `401` if invalid credentials
-* `404` if it does not exist
-
-
-### Delete a subscription
-
-**DELETE:**
-```
-/v1/subscription/:subscription_id
-```
-
-**Notes:**
-* This route will cancel a customer's subscription and including all subscription items in it.
-If a customer wants to cancel only one item the [Delete a subscription item](#delete-a-subscription-item)
-route should be used instead.
-
-**Response:** None
-
-**Status Codes:**
-* `204` if successful
-* `401` if invalid credentials
-* `404` if does not exist
-
-
 ### Get a subscription item list
 
 **GET:**
 ```
-/v1/subscription/:subscription_id/item
+/v1/subscription-item
 ```
 
 **Response:**
 ```json
 [
     {
-        "id": 1,
-        "subscription_id": 1,
+        "id": 548021379723503,
+        "subscription_id": 660517636861735,
         "pet_name": "Tony",
-        "product_id": 4590005649486,
-        "variant_id": 32205011419214,
+        "product": {
+            "id": 4590005649486,
+            "title": "Allergy Care - Kangaroo",
+            "product_type": "canine",
+            "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_d2ded379-ae3c-456d-9328-18d8cf52e72a.png?v=1587916360",
+            "is_prescription": true,
+            "created_at": "2020-03-17T23:36:02.000000",
+            "updated_at": "2020-07-18T11:10:49.000000"
+        },
         "amount": 64.49,
         "currency": "usd",
         "interval": "week",
         "interval_count": 2,
+        "quantity": 1,
+        "cancel_at_period_end": false,
+        "current_period_start": "2020-07-18T11:07:11.000000",
+        "current_period_end": "2020-08-01T11:07:11.000000",
         "is_active": true,
-        "created_at": "2020-07-06T22:53:48.989549",
-        "updated_at": "2020-07-06T22:53:48.989558"
+        "created_at": "2020-07-18T11:07:12.714837",
+        "updated_at": "2020-07-18T11:07:12.714840"
     },
     {
-        "id": 2,
-        "subscription_id": 1,
-        "pet_name": "Indy",
-        "product_id": 4490930159694,
-        "variant_id": 31632976347214,
-        "amount": 99.49,
+        "id": 129177802981270,
+        "subscription_id": 660517636861735,
+        "pet_name": "Gordo",
+        "product": {
+            "id": 4590004666446,
+            "title": "Advanced Kidney Care",
+            "product_type": "canine",
+            "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_f8d62422-5aee-465e-8f79-7b486a2df200.png?v=1587916342",
+            "is_prescription": true,
+            "created_at": "2020-03-17T23:32:10.000000",
+            "updated_at": "2020-07-18T11:10:49.000000"
+        },
+        "amount": 64.49,
         "currency": "usd",
         "interval": "week",
         "interval_count": 2,
+        "quantity": 1,
+        "cancel_at_period_end": false,
+        "current_period_start": "2020-07-18T11:07:11.000000",
+        "current_period_end": "2020-08-01T11:07:11.000000",
         "is_active": true,
-        "created_at": "2020-07-06T22:53:48.990189",
-        "updated_at": "2020-07-06T22:53:48.990194"
-    }
+        "created_at": "2020-07-18T11:07:12.714361",
+        "updated_at": "2020-07-18T11:07:12.714369"
+    },
+    ...
 ]
 ```
 
@@ -1853,34 +1639,45 @@ route should be used instead.
 
 **GET:**
 ```
-/v1/subscription/:subscription_id/item/:subscription_item_id
+/v1/subscription-item/:subscription_item_id
 ```
 
 **Response:**
 ```json
 {
-    "id": 1,
-    "subscription_id": 1,
+    "id": 548021379723503,
+    "subscription_id": 660517636861735,
     "pet_name": "Tony",
-    "product_id": 4590005649486,
-    "variant_id": 32205011419214,
+    "product": {
+        "id": 4590005649486,
+        "title": "Allergy Care - Kangaroo",
+        "product_type": "canine",
+        "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_d2ded379-ae3c-456d-9328-18d8cf52e72a.png?v=1587916360",
+        "is_prescription": true,
+        "created_at": "2020-03-17T23:36:02.000000",
+        "updated_at": "2020-07-18T11:10:49.000000"
+    },
     "amount": 64.49,
     "currency": "usd",
     "interval": "week",
     "interval_count": 2,
+    "quantity": 1,
+    "cancel_at_period_end": false,
+    "current_period_start": "2020-07-18T11:07:11.000000",
+    "current_period_end": "2020-08-01T11:07:11.000000",
     "is_active": true,
-    "created_at": "2020-07-06T22:53:48.989549",
-    "updated_at": "2020-07-06T22:53:48.989558"
+    "created_at": "2020-07-18T11:07:12.714837",
+    "updated_at": "2020-07-18T11:07:12.714840"
 }
 ```
 
 **Status Codes:**
 * `200` if successful
 * `401` if invalid credentials
-* `404` if it does not exist
+* `404` if does not exist
 
 
-### Delete a subscription item
+### Cancel a subscription item
 
 **DELETE:**
 ```
@@ -1990,7 +1787,7 @@ is canceled, this will terminate the subscription automatically.
 **Status Codes:**
 * `200` if successful
 * `401` if invalid credentials
-* `404` if veterinarian does not exist
+* `404` if does not exist
 
 
 ### Update a veterinarian
