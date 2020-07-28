@@ -220,7 +220,7 @@ for any route that is accessed without proper Authorization.
 **Response:**
 ```json
 {
-    "id": 1,
+    "id": 3348435992654,
     "token": "reallylongjsonwebtokenstring"
 }
 ```
@@ -569,7 +569,7 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
 
 **Notes:**
 * This route will create a veterinarian diet approval form for the veterinarian and send it to them.
-* Only call this route for therapeutic diets.
+* Only call this route for prescription diets.
 
 
 **Body:**
@@ -997,39 +997,41 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
 **Body:**
 ```json
 {
-    "name": "Zino",
-    "pet_type": "feline",
-    "gender": "female",
-    "breed": "",
-    "weight": 10,
-    "age": 7,
-    "activity_level": "low",
-    "body_level": "very large",
-    "living_environment": "mostly indoors",
-    "health_tags": ["obesity", "kidney_disease_early"],
-    "other_tags": ["depression"],
-    "is_neutered": true
+	"name": "Tony",
+	"pet_type": "canine",
+	"gender": "male",
+	"breed": "",
+	"weight": 40,
+	"age": 6,
+	"activity_level": "high",
+	"body_level": "large",
+	"living_environment": "both",
+	"health_tags": ["poor_hair_coat"],
+	"other_tags": [],
+	"is_neutered": true
 }
 ```
 
 **Response:**
 ```json
 {
-    "id": 8,
-    "name": "Zino",
-    "pet_type": "feline",
-    "gender": "female",
+    "id": 911163679325940,
+    "name": "Tony",
+    "pet_type": "canine",
+    "gender": "male",
     "breed": "",
-    "weight": 10,
-    "age": 7,
-    "activity_level": "low",
-    "body_level": "very large",
-    "living_environment": "mostly indoors",
-    "health_tags": ["obesity", "kidney_disease_early"],
-    "other_tags": ["depression"],
+    "weight": 40,
+    "age": 6,
+    "activity_level": "high",
+    "body_level": "large",
+    "living_environment": "both",
+    "health_tags": [
+        "poor_hair_coat"
+    ],
+    "other_tags": [],
     "is_neutered": true,
-    "created_at": "2020-01-11T21:26:11.913263",
-    "updated_at": "2020-01-11T21:26:11.913341"
+    "created_at": "2020-07-21T22:42:21.265310",
+    "updated_at": "2020-07-21T22:42:21.265313"
 }
 ```
 
@@ -1050,39 +1052,25 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
 ```json
 [
     {
-        "id": 1,
-        "name": "Zino",
-        "pet_type": "feline",
-        "gender": "female",
+        "id": 911163679325940,
+        "name": "Tony",
+        "pet_type": "canine",
+        "gender": "male",
         "breed": "",
-        "weight": 10,
-        "age": 7,
-        "activity_level": "low",
-        "body_level": "very large",
-        "living_environment": "mostly indoors",
-        "health_tags": ["obesity", "kidney_disease_early"],
-        "other_tags": ["depression"],
-        "is_neutered": true,
-        "created_at": "2020-01-11T21:31:59.925759",
-        "updated_at": "2020-01-11T21:31:59.925848"
-    },
-    {
-        "id": 2,
-        "name": "Luna",
-        "pet_type": "feline",
-        "gender": "female",
-        "breed": "",
-        "weight": 8,
-        "age": 5,
+        "weight": 40,
+        "age": 6,
         "activity_level": "high",
-        "body_level": "small",
-        "living_environment": "mostly indoors",
-        "health_tags": [],
+        "body_level": "large",
+        "living_environment": "both",
+        "health_tags": [
+            "poor_hair_coat"
+        ],
         "other_tags": [],
         "is_neutered": true,
-        "created_at": "2020-01-11T21:31:59.925759",
-        "updated_at": "2020-01-11T21:31:59.925848"
-    }
+        "created_at": "2020-07-21T22:42:21.265310",
+        "updated_at": "2020-07-21T22:42:21.265313"
+    },
+    ...
 ]
 ```
 
@@ -1102,21 +1090,23 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
 **Response:**
 ```json
 {
-    "id": 1,
-    "name": "Zino",
-    "pet_type": "feline",
-    "gender": "female",
+    "id": 911163679325940,
+    "name": "Tony",
+    "pet_type": "canine",
+    "gender": "male",
     "breed": "",
-    "weight": 10,
-    "age": 8,
-    "activity_level": "low",
-    "body_level": "very large",
-    "living_environment": "mostly indoors",
-    "health_tags": ["obesity", "kidney_disease_early"],
-    "other_tags": ["depression"],
+    "weight": 40,
+    "age": 6,
+    "activity_level": "high",
+    "body_level": "large",
+    "living_environment": "both",
+    "health_tags": [
+        "poor_hair_coat"
+    ],
+    "other_tags": [],
     "is_neutered": true,
-    "created_at": "2020-01-11T21:31:59.925759",
-    "updated_at": "2020-01-11T21:31:59.925848"
+    "created_at": "2020-07-21T22:42:21.265310",
+    "updated_at": "2020-07-21T22:42:21.265313"
 }
 ```
 
@@ -1143,21 +1133,23 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
 **Response:**
 ```json
 {
-    "id": 1,
-    "name": "Zino",
-    "pet_type": "feline",
-    "gender": "female",
+    "id": 911163679325940,
+    "name": "Tony",
+    "pet_type": "canine",
+    "gender": "male",
     "breed": "",
-    "weight": 10,
-    "age": 7,
+    "weight": 40,
+    "age": 6,
     "activity_level": "low",
-    "body_level": "very large",
-    "living_environment": "mostly indoors",
-    "health_tags": ["obesity", "kidney_disease_early"],
-    "other_tags": ["depression"],
+    "body_level": "large",
+    "living_environment": "both",
+    "health_tags": [
+        "poor_hair_coat"
+    ],
+    "other_tags": [],
     "is_neutered": true,
-    "created_at": "2020-01-11T21:31:59.925759",
-    "updated_at": "2020-01-11T21:31:59.925848"
+    "created_at": "2020-07-21T22:42:21.265310",
+    "updated_at": "2020-07-21T22:42:21.265313"
 }
 ```
 
@@ -1430,7 +1422,9 @@ Example: `/v1/product/recommendation/canine?general=vomiting&general=diarrhea&me
 
 **Notes:**
 * The `product_type` must either be `canine` or `feline` 
-* The response will contain two sorted lists, `recommendations` and `alternatives`. 
+* The response will contain two sorted lists, `recommendations` and `alternatives`.
+* It is possible for the `recommendations` to be empty
+* It is possible for the `alternatives` to be empty
 
 **Response:**
 ```json
@@ -1481,11 +1475,11 @@ Example: `/v1/product/recommendation/canine?general=vomiting&general=diarrhea&me
 {
 	"items": [
 		{
-			"pet_id": 2,
+			"pet_id": 911163679325940,
 			"variant_id": 32204975833166
 		},
 		{
-			"pet_id": 3,
+			"pet_id": 578489150136090,
 			"variant_id": 32205011419214
 		}
 	]
@@ -1495,16 +1489,17 @@ Example: `/v1/product/recommendation/canine?general=vomiting&general=diarrhea&me
 **Response:**
 ```json
 {
-    "id": 660517636861735,
-    "customer_id": 3341083181134,
-    "cancel_at_period_end": false,
-    "current_period_start": "2020-07-18T11:07:11.000000",
-    "current_period_end": "2020-08-01T11:07:11.000000",
+    "id": 281349006936606,
+    "customer_id": 3348435992654,
+    "status": "active",
+    "current_period_start": "2020-07-22T00:06:53.000000",
+    "current_period_end": "2020-08-05T00:06:53.000000",
     "items": [
         {
-            "id": 129177802981270,
-            "subscription_id": 660517636861735,
-            "pet_name": "Gordo",
+            "id": 353102347431449,
+            "customer_id": 3348435992654,
+            "subscription_id": 281349006936606,
+            "pet_name": "Tony",
             "product": {
                 "id": 4590004666446,
                 "title": "Advanced Kidney Care",
@@ -1512,24 +1507,24 @@ Example: `/v1/product/recommendation/canine?general=vomiting&general=diarrhea&me
                 "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_f8d62422-5aee-465e-8f79-7b486a2df200.png?v=1587916342",
                 "is_prescription": true,
                 "created_at": "2020-03-17T23:32:10.000000",
-                "updated_at": "2020-07-18T10:29:16.000000"
+                "updated_at": "2020-07-21T22:33:44.000000"
             },
             "amount": 64.49,
             "currency": "usd",
             "interval": "week",
             "interval_count": 2,
             "quantity": 1,
-            "cancel_at_period_end": false,
-            "current_period_start": "2020-07-18T11:07:11.000000",
-            "current_period_end": "2020-08-01T11:07:11.000000",
+            "current_period_start": "2020-07-22T00:06:53.000000",
+            "current_period_end": "2020-08-05T00:06:53.000000",
             "is_active": true,
-            "created_at": "2020-07-18T11:07:12.714361",
-            "updated_at": "2020-07-18T11:07:12.714369"
+            "created_at": "2020-07-22T00:06:55.274648",
+            "updated_at": "2020-07-22T00:06:55.274650"
         },
         {
-            "id": 548021379723503,
-            "subscription_id": 660517636861735,
-            "pet_name": "Tony",
+            "id": 899585246809306,
+            "customer_id": 3348435992654,
+            "subscription_id": 281349006936606,
+            "pet_name": "Gordo",
             "product": {
                 "id": 4590005649486,
                 "title": "Allergy Care - Kangaroo",
@@ -1537,25 +1532,23 @@ Example: `/v1/product/recommendation/canine?general=vomiting&general=diarrhea&me
                 "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_d2ded379-ae3c-456d-9328-18d8cf52e72a.png?v=1587916360",
                 "is_prescription": true,
                 "created_at": "2020-03-17T23:36:02.000000",
-                "updated_at": "2020-07-18T10:29:31.000000"
+                "updated_at": "2020-07-21T22:33:55.000000"
             },
             "amount": 64.49,
             "currency": "usd",
             "interval": "week",
             "interval_count": 2,
             "quantity": 1,
-            "cancel_at_period_end": false,
-            "current_period_start": "2020-07-18T11:07:11.000000",
-            "current_period_end": "2020-08-01T11:07:11.000000",
+            "current_period_start": "2020-07-22T00:06:53.000000",
+            "current_period_end": "2020-08-05T00:06:53.000000",
             "is_active": true,
-            "created_at": "2020-07-18T11:07:12.714837",
-            "updated_at": "2020-07-18T11:07:12.714840"
+            "created_at": "2020-07-22T00:06:55.274890",
+            "updated_at": "2020-07-22T00:06:55.274892"
         }
     ],
-    "status": "active",
     "is_active": true,
-    "created_at": "2020-07-18T11:07:12.715114",
-    "updated_at": "2020-07-18T11:07:12.715116"
+    "created_at": "2020-07-22T00:06:55.274350",
+    "updated_at": "2020-07-22T00:06:55.274352"
 }
 ```
 
@@ -1577,9 +1570,10 @@ Example: `/v1/product/recommendation/canine?general=vomiting&general=diarrhea&me
 ```json
 [
     {
-        "id": 548021379723503,
-        "subscription_id": 660517636861735,
-        "pet_name": "Tony",
+        "id": 899585246809306,
+        "customer_id": 3348435992654,
+        "subscription_id": 281349006936606,
+        "pet_name": "Gordo",
         "product": {
             "id": 4590005649486,
             "title": "Allergy Care - Kangaroo",
@@ -1587,24 +1581,24 @@ Example: `/v1/product/recommendation/canine?general=vomiting&general=diarrhea&me
             "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_d2ded379-ae3c-456d-9328-18d8cf52e72a.png?v=1587916360",
             "is_prescription": true,
             "created_at": "2020-03-17T23:36:02.000000",
-            "updated_at": "2020-07-18T11:10:49.000000"
+            "updated_at": "2020-07-21T22:33:55.000000"
         },
         "amount": 64.49,
         "currency": "usd",
         "interval": "week",
         "interval_count": 2,
         "quantity": 1,
-        "cancel_at_period_end": false,
-        "current_period_start": "2020-07-18T11:07:11.000000",
-        "current_period_end": "2020-08-01T11:07:11.000000",
+        "current_period_start": "2020-07-22T00:06:53.000000",
+        "current_period_end": "2020-08-05T00:06:53.000000",
         "is_active": true,
-        "created_at": "2020-07-18T11:07:12.714837",
-        "updated_at": "2020-07-18T11:07:12.714840"
+        "created_at": "2020-07-22T00:06:55.274890",
+        "updated_at": "2020-07-22T00:06:55.274892"
     },
     {
-        "id": 129177802981270,
-        "subscription_id": 660517636861735,
-        "pet_name": "Gordo",
+        "id": 353102347431449,
+        "customer_id": 3348435992654,
+        "subscription_id": 281349006936606,
+        "pet_name": "Tony",
         "product": {
             "id": 4590004666446,
             "title": "Advanced Kidney Care",
@@ -1612,21 +1606,19 @@ Example: `/v1/product/recommendation/canine?general=vomiting&general=diarrhea&me
             "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_f8d62422-5aee-465e-8f79-7b486a2df200.png?v=1587916342",
             "is_prescription": true,
             "created_at": "2020-03-17T23:32:10.000000",
-            "updated_at": "2020-07-18T11:10:49.000000"
+            "updated_at": "2020-07-21T22:33:44.000000"
         },
         "amount": 64.49,
         "currency": "usd",
         "interval": "week",
         "interval_count": 2,
         "quantity": 1,
-        "cancel_at_period_end": false,
-        "current_period_start": "2020-07-18T11:07:11.000000",
-        "current_period_end": "2020-08-01T11:07:11.000000",
+        "current_period_start": "2020-07-22T00:06:53.000000",
+        "current_period_end": "2020-08-05T00:06:53.000000",
         "is_active": true,
-        "created_at": "2020-07-18T11:07:12.714361",
-        "updated_at": "2020-07-18T11:07:12.714369"
-    },
-    ...
+        "created_at": "2020-07-22T00:06:55.274648",
+        "updated_at": "2020-07-22T00:06:55.274650"
+    }
 ]
 ```
 
@@ -1645,9 +1637,10 @@ Example: `/v1/product/recommendation/canine?general=vomiting&general=diarrhea&me
 **Response:**
 ```json
 {
-    "id": 548021379723503,
-    "subscription_id": 660517636861735,
-    "pet_name": "Tony",
+    "id": 899585246809306,
+    "customer_id": 3348435992654,
+    "subscription_id": 281349006936606,
+    "pet_name": "Gordo",
     "product": {
         "id": 4590005649486,
         "title": "Allergy Care - Kangaroo",
@@ -1655,19 +1648,18 @@ Example: `/v1/product/recommendation/canine?general=vomiting&general=diarrhea&me
         "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_d2ded379-ae3c-456d-9328-18d8cf52e72a.png?v=1587916360",
         "is_prescription": true,
         "created_at": "2020-03-17T23:36:02.000000",
-        "updated_at": "2020-07-18T11:10:49.000000"
+        "updated_at": "2020-07-21T22:33:55.000000"
     },
     "amount": 64.49,
     "currency": "usd",
     "interval": "week",
     "interval_count": 2,
     "quantity": 1,
-    "cancel_at_period_end": false,
-    "current_period_start": "2020-07-18T11:07:11.000000",
-    "current_period_end": "2020-08-01T11:07:11.000000",
-    "is_active": true,
-    "created_at": "2020-07-18T11:07:12.714837",
-    "updated_at": "2020-07-18T11:07:12.714840"
+    "current_period_start": "2020-07-22T00:06:53.000000",
+    "current_period_end": "2020-08-05T00:06:53.000000",
+    "is_active": false,
+    "created_at": "2020-07-22T00:06:55.274890",
+    "updated_at": "2020-07-22T00:06:55.274892"
 }
 ```
 
@@ -1681,7 +1673,7 @@ Example: `/v1/product/recommendation/canine?general=vomiting&general=diarrhea&me
 
 **DELETE:**
 ```
-/v1/subscription/:subscription_id/item/:subscription_item_id
+/v1/subscription-item/:subscription_item_id
 ```
 
 **Notes:**
@@ -1706,25 +1698,25 @@ is canceled, this will terminate the subscription automatically.
 **Body:**
 ```json
 {
-    "clinic": "Veterinarian Health Clinic",
-    "first_name": "John",
-    "last_name": "Doe",
-    "phone": "555-555-5555",
-    "email": "some-email@gmail.com"
+	"clinic": "Kobes Amazing Clinic",
+	"first_name": "Kobe",
+	"last_name": "Bryant",
+	"phone": "555-555-5555",
+	"email": "black.mamba@gmail.com"
 }
 ```
 
 **Response:**
 ```json
 {
-    "id": 1,
-    "clinic": "Veterinarian Health Clinic",
-    "first_name": "John",
-    "last_name": "Doe",
+    "id": 820841247248408,
+    "clinic": "Kobes Amazing Clinic",
+    "first_name": "Kobe",
+    "last_name": "Bryant",
     "phone": "555-555-5555",
-    "email": "some-email@gmail.com",
-    "created_at": "2020-01-11T22:31:05.998866",
-    "updated_at": "2020-01-11T22:31:05.999015"
+    "email": "black.mamba@gmail.com",
+    "created_at": "2020-07-21T23:15:27.876643",
+    "updated_at": "2020-07-21T23:15:27.876646"
 }
 ```
 
@@ -1745,14 +1737,14 @@ is canceled, this will terminate the subscription automatically.
 ```json
 [
     {
-        "id": 1,
-        "clinic": "Veterinarian Health Clinic",
-        "first_name": "John",
-        "last_name": "Doe",
+        "id": 820841247248408,
+        "clinic": "Kobes Amazing Clinic",
+        "first_name": "Kobe",
+        "last_name": "Bryant",
         "phone": "555-555-5555",
-        "email": "some-email@gmail.com",
-        "created_at": "2020-01-11T22:31:05.998866",
-        "updated_at": "2020-01-11T22:31:05.999015"
+        "email": "black.mamba@gmail.com",
+        "created_at": "2020-07-21T23:15:27.876643",
+        "updated_at": "2020-07-21T23:15:27.876646"
     }
 ]
 ```
@@ -1773,14 +1765,14 @@ is canceled, this will terminate the subscription automatically.
 **Response:**
 ```json
 {
-    "id": 1,
-    "clinic": "Veterinarian Health Clinic",
-    "first_name": "John",
-    "last_name": "Doe",
+    "id": 820841247248408,
+    "clinic": "Kobes Amazing Clinic",
+    "first_name": "Kobe",
+    "last_name": "Bryant",
     "phone": "555-555-5555",
-    "email": "some-email@gmail.com",
-    "created_at": "2020-01-11T22:31:05.998866",
-    "updated_at": "2020-01-11T22:31:05.999015"
+    "email": "black.mamba@gmail.com",
+    "created_at": "2020-07-21T23:15:27.876643",
+    "updated_at": "2020-07-21T23:15:27.876646"
 }
 ```
 
@@ -1807,14 +1799,14 @@ is canceled, this will terminate the subscription automatically.
 **Response:**
 ```json
 {
-    "id": 1,
-    "clinic": "Veterinarian Health Clinic",
-    "first_name": "John",
-    "last_name": "Doe",
+    "id": 820841247248408,
+    "clinic": "Kobes Amazing Clinic",
+    "first_name": "Kobe",
+    "last_name": "Bryant",
     "phone": "123-456-7890",
-    "email": "some-email@gmail.com",
-    "created_at": "2020-01-11T22:31:05.998866",
-    "updated_at": "2020-01-11T22:31:05.999015"
+    "email": "black.mamba@gmail.com",
+    "created_at": "2020-07-21T23:15:27.876643",
+    "updated_at": "2020-07-21T23:17:41.207232"
 }
 ```
 
