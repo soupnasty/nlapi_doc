@@ -1,4 +1,4 @@
-# Nine and Line API Documentation
+# Nine & Line API Documentation
 
 
 ## A Falcon Seed Project
@@ -13,18 +13,19 @@ which map to HTTP verbs." - [http://falconframework.org/](http://falconframework
 
 ## Table of Contents
 
-- [Admin Sequence Diagram](#admin-sequence-diagram)
-- [User Sequence Diagram](#user-sequence-diagram)
-- [Nine and Line Classifications](#nine-and-line-classifications)
+- [Deployment](#user-sequence-diagram)
 - [API Routes](#api-routes)
 
 
-### Admin Sequence Diagram
-![Admin Sequence Diagram](http://www.plantuml.com/plantuml/png/ZP71JiGW48RlF0KlOBnxCBl6usOl7ZnFONJ9Ka0OedrxST9CR7PRUYpvFlZpzL08CjNHAp0KipxQqGKrn1_zTed9VKpAHE_Ha8kXw7SS4dnYKQb9phW4WHWy9gSi40nGa0zUvm-5mUfs7LzvFhs0kRQJXNy-BUppwSPLl4e_FCi0_QJ1MaqPWHwjGz8fHriDAI4QFIzhy2seJQvMP_ogM4ZDv2p9-gNPq3o9ik1M7XEbf9OF_pyZExV6tMeSwxxpZSCbngjYX5afULyeKp2BNfoviRc5nooS1OBrVn3p7pj2gE3zjD9Vm1t5cTiTM-X-PncnMPQ9JancklsOwjGpjL0SzmKKjjzGqBqPHTXTKeoDc09rUWhMIoeWLpsqmphwNm00)
+### Deployment
 
+#### Deploy with elastic beanstalk
 
-### User Sequence Diagram
-![User Sequence Diagram](http://www.plantuml.com/plantuml/png/ZPInZjim38PtFOLUeEYUeKYBZaMNehYPbfb4Y2Ff93evl_rHFaCnOSNG5DZwIFty4kQO22ADjq618H_r_uHHTVv3_xluO4-JCduOq93rBkatx0ASCQd0DTRO08vcy6UmgWU23XBEBtul3mfThxdTtFBldrzWhlncNSzlrzNykAdDcVIt7-LwVT1tcomb_S2EFr6L4wQMF0p1I1TqV17a-3hY-uY9r08mAw9omPWlOYXE0Yw4w2xW5DWFbjOohCnHfRE4qjH41CBlWpzRbqUyU7zLcLXGcRZmOs29gDFaZ12IzJ4QMIV6hme6GTMyKcwbVMIoAbKG3KPdkb6feFUTYXWxGWMthrAGLOSICTwTRBnLBKBV9nsGj7KdN_gKM8VvpCInBqxgaJ8ctJsFIpV15HLy99s9InTeE-7o8odPNqvtHy9e7SJfnP0ChfY6OLTqoymItnrTq3iAnA9i9gp_3U5ZbjLRf5Jxfiz8Js1ZG6YzWnsW6r3mCgRSnGorhoB3xPl8SECYCjcoXuorhI63krieaBA5HtJzU1i-0G00)
+1. Make local code changes
+2. Commit and push code changes to git remote
+3. Assert that you are in the correct eb environment: ```eb status```
+4. change the environment if needed: ```eb use {env_name}```
+5. Bundle and deploy code changes: ```eb deploy```
 
 
 ### Nine and Line Classifications
@@ -133,6 +134,7 @@ for any route that is accessed without proper Authorization.
 - [Get a customer address](#get-a-customer-address)
 - [Update a customer address](#update-a-customer-address)
 - [Add a customer payment method](#add-a-customer-payment-method)
+- [Get a customer payment method](#get-a-customer-payment-method)
 
 #### Diet Approval
 - [Create a diet approval](#create-a-diet-approval)
@@ -558,6 +560,29 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
 * `409` stripe issue
 
 
+### Get a customer payment method
+
+**GET:**
+```
+/v1/customer/payment-method
+```
+
+**Response:**
+```json
+{
+    "brand": "visa",
+    "exp_month": 9,
+    "exp_year": 2021,
+    "last4": "4242",
+    "created": "2020-09-04T02:06:22.000000"
+}
+```
+
+**Status Codes:**
+* `200` if successful
+* `409` payment method has not been added for customer
+
+
 ## Diet Approval Routes
 
 ### Create a diet approval
@@ -576,7 +601,7 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
 ```json
 {
 	"line_item_id": 5119807946830,
-	"veterinarian_id": 1
+	"veterinarian_id": 259171000714498
 }
 ```
 
@@ -585,8 +610,8 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
 {
     "id": 44,
     "customer_id": 3224454660174,
-    "pet_id": 1,
-    "veterinarian_id": 1,
+    "pet_id": 624542287671609,
+    "veterinarian_id": 259171000714498,
     "line_item_id": 5119807946830,
     "status": "open",
     "signed_at": null,
@@ -616,8 +641,8 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
     {
         "id": 44,
         "customer_id": 3224454660174,
-        "pet_id": 1,
-        "veterinarian_id": 1,
+        "pet_id": 624542287671609,
+        "veterinarian_id": 259171000714498,
         "line_item_id": 5119807946830,
         "status": "open",
         "signed_at": null,
@@ -646,8 +671,8 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
 {
     "id": 44,
     "customer_id": 3224454660174,
-    "pet_id": 1,
-    "veterinarian_id": 1,
+    "pet_id": 624542287671609,
+    "veterinarian_id": 259171000714498,
     "line_item_id": 5119807946830,
     "status": "open",
     "signed_at": null,
@@ -1698,7 +1723,7 @@ is canceled, this will terminate the subscription automatically.
 **Body:**
 ```json
 {
-	"clinic": "Kobes Amazing Clinic",
+	"clinic": "Mambarrific Clinic",
 	"first_name": "Kobe",
 	"last_name": "Bryant",
 	"phone": "555-555-5555",
@@ -1710,7 +1735,7 @@ is canceled, this will terminate the subscription automatically.
 ```json
 {
     "id": 820841247248408,
-    "clinic": "Kobes Amazing Clinic",
+    "clinic": "Mambarrific Clinic",
     "first_name": "Kobe",
     "last_name": "Bryant",
     "phone": "555-555-5555",
