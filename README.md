@@ -135,6 +135,10 @@ for any route that is accessed without proper Authorization.
 - [Update a customer address](#update-a-customer-address)
 - [Add a customer payment method](#add-a-customer-payment-method)
 - [Get a customer payment method](#get-a-customer-payment-method)
+- [Request a password reset](#request-a-password-reset)
+- [Confirm a password reset](#confirm-a-password-reset)
+- [Request an email change](#request-an-email-change)
+- [Confirm an email change](#confirm-an-email-change)
 
 #### Diet Approval
 - [Create a diet approval](#create-a-diet-approval)
@@ -164,6 +168,7 @@ for any route that is accessed without proper Authorization.
 - [Get a product list](#get-a-product-list)
 - [Get a product detail](#get-a-product-detail)
 - [Get a list of product variants](#get-a-list-of-product-variants)
+- [Get customized product list](#get-customized-product-list)
 - [Get product recommendations](#get-product-recommendations)
 
 #### Subscriptions
@@ -314,6 +319,9 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
 ```
 /v1/customer
 ```
+
+**Notes:**
+* In order to update a customer email, use the [request an email change](#request-an-email-change) route.
 
 **Body:**
 ```json
@@ -552,7 +560,16 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
 }
 ```
 
-**Response:** None
+**Response:**
+```json
+{
+    "brand": "visa",
+    "exp_month": 9,
+    "exp_year": 2021,
+    "last4": "4242",
+    "created": "2020-09-04T02:06:22.000000"
+}
+```
 
 **Status Codes:**
 * `200` if successful
@@ -581,6 +598,101 @@ header for auth required HTTPS requests. For future auth tokens, use the `/v1/au
 **Status Codes:**
 * `200` if successful
 * `409` payment method has not been added for customer
+
+
+### Request a password reset
+
+**POST:**
+```
+/v1/password-reset/request
+```
+
+**Notes:**
+* This will send an email to the user with a reset link: `www.nineandline.com/password-reset/:code`
+
+**Body:**
+```json
+{
+    "email": "something@email.com"
+}
+```
+
+**Response:** None
+
+**Status Codes:**
+* `201` if successful
+* `400` if incorrect data provided
+
+
+### Confirm a password reset
+
+**POST:**
+```
+/v1/password-reset/confirm
+```
+
+**Notes:**
+* `password` can only be reset once with each `code`. If a user tries to use a `code` multiple times the response will be a 401.
+
+**Body:**
+```json
+{
+    "code": "6afc2148-5e2f-4c71-93a9-d250f90fccc2",
+    "password": "MyNewPassword"
+}
+```
+
+**Response:** None
+
+**Status Codes:**
+* `200` if successful
+* `400` if incorrect data provided
+* `401` if code not valid
+
+
+### Request an email change
+
+**POST:**
+```
+/v1/email-change/request
+```
+
+**Body:**
+```json
+{
+    "email": "new@email.com"
+}
+```
+
+**Response:** None
+
+**Status Codes:**
+* `201` if successful
+* `400` if incorrect data provided
+* `401` if invalid credentials
+
+
+### Confirm an email change
+
+**POST:**
+```
+/v1/email-change/confirm
+```
+
+**Body:**
+```json
+{
+    "code": "6afc2148-5e2f-4c71-93a9-d250f90fccc2"
+}
+```
+
+**Response:** None
+
+**Status Codes:**
+* `200` if successful
+* `400` if incorrect data provided
+* `401` if invalid credentials
+* `403` if code is not for user
 
 
 ## Diet Approval Routes
@@ -1291,22 +1403,85 @@ Example: `/v1/product?product-type=feline`
 ```json
 [
     {
-        "id": 4490930159694,
-        "title": "Allergy Care - White Fish & Sweet Potato",
-        "product_type": "canine",
-        "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_797a2cb7-b020-4532-b1f5-3fffc8968fb6.png?v=1587916371",
-        "is_prescription": false,
-        "created_at": "2020-01-04T19:00:21.000000",
-        "updated_at": "2020-07-12T19:51:35.000000"
-    },
-    {
-        "id": 4590004666446,
+        "id": 4590009417806,
         "title": "Advanced Kidney Care",
-        "product_type": "canine",
-        "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_f8d62422-5aee-465e-8f79-7b486a2df200.png?v=1587916342",
+        "product_type": "feline",
+        "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/example_diet_981d44f3-e9de-468d-b76c-285b185ee29b.png?v=1587915980",
         "is_prescription": true,
-        "created_at": "2020-03-17T23:32:10.000000",
-        "updated_at": "2020-07-12T19:51:58.000000"
+        "detail": {
+            "general_description": "A diet low in protein, phosphorus, and sodium to help support cats with advanced (IRIS Stage 3-4) kidney disease.",
+            "key_features": [
+                "Restricted in protein, phosphorus, and sodium",
+                "High-quality protein, providing essential amino acids for the maintenance of strong muscle mass",
+                "Enriched in vitamin E and omega-3 fatty acids (EPA/DHA/DPA)",
+                "Recommended best for advanced kidney disease (IRIS Stage 3-4) and heart disease",
+                "Completely balanced for long term feeding under veterinary supervision",
+                "No preservatives"
+            ],
+            "ingredients": "Dark Meat Chicken, Chicken Liver, Chicken Heart, Pasta, Chicken Fat + Premium Fish Oil, Vitamin & Mineral Supplements",
+            "nutrition_facts": {
+                "crude_protein": [
+                    "13.2% (min)",
+                    "30.0%"
+                ],
+                "crude_fat": [
+                    "13.2% (min)",
+                    "30.0%"
+                ],
+                "crude_fiber": [
+                    "0.9% (max)",
+                    "2.1%"
+                ],
+                "moisture": [
+                    "56.0% (max)",
+                    null
+                ],
+                "phosphorous": [
+                    null,
+                    "0.26%"
+                ],
+                "sodium": [
+                    null,
+                    "0.12%"
+                ],
+                "potassium": [
+                    null,
+                    "1.32%"
+                ]
+            },
+            "nutritional_adequacy_statement": "Advanced Kidney Care Diet is intended for management of advanced kidney disease.  Use under direct instruction or supervision of a veterinarian."
+        },
+        "variants": [
+            {
+                "id": 32204998574158,
+                "title": "8",
+                "price": 38.96,
+                "weight": 0.0,
+                "weight_unit": "lb",
+                "created_at": "2020-05-18T16:51:45.000000",
+                "updated_at": "2020-05-21T02:31:01.000000"
+            },
+            {
+                "id": 32204998606926,
+                "title": "13",
+                "price": 45.96,
+                "weight": 0.0,
+                "weight_unit": "lb",
+                "created_at": "2020-05-18T16:51:45.000000",
+                "updated_at": "2020-05-21T02:34:39.000000"
+            },
+            {
+                "id": 32204998639694,
+                "title": "25",
+                "price": 53.96,
+                "weight": 0.0,
+                "weight_unit": "lb",
+                "created_at": "2020-05-18T16:51:45.000000",
+                "updated_at": "2020-05-21T02:31:01.000000"
+            }
+        ],
+        "created_at": "2020-03-17T23:48:28.000000",
+        "updated_at": "2020-09-06T17:46:40.000000"
     },
     ...
 ]
@@ -1327,54 +1502,85 @@ Example: `/v1/product?product-type=feline`
 **Response:**
 ```json
 {
-    "id": 4590004666446,
+    "id": 4590009417806,
     "title": "Advanced Kidney Care",
-    "product_type": "canine",
-    "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/canine_diet_f8d62422-5aee-465e-8f79-7b486a2df200.png?v=1587916342",
+    "product_type": "feline",
+    "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/example_diet_981d44f3-e9de-468d-b76c-285b185ee29b.png?v=1587915980",
     "is_prescription": true,
-    "created_at": "2020-03-17T23:32:10.000000",
-    "updated_at": "2020-07-18T11:10:49.000000",
-    "general_description": "A diet low in protein, phosphorus, and sodium to help support dogs with advanced (IRIS Stage 3-4) kidney disease.",
-    "key_features": [
-        "Restricted in protein, phosphorus, and sodium",
-        "High-quality protein, providing essential amino acids for the maintenance of strong muscle mass",
-        "Enriched in vitamin E and omega-3 fatty acids (EPA/DHA/DPA)",
-        "Recommended best for advanced kidney disease (IRIS Stage 3-4), protein losing kidney disease (PLN), and heart disease",
-        "Completely balanced for long term feeding under veterinary supervision",
-        "No preservatives"
-    ],
-    "ingredients": "Dark Meat Chicken, Chicken Liver, White Rice, Olive Oil, Carrots, Cauliflower, Kale + Premium Fish Oil, Vitamin & Mineral Supplements",
-    "nutrition_facts": {
-        "crude_protein": [
-            "5.9% (min)",
-            "16.5%"
+    "detail": {
+        "general_description": "A diet low in protein, phosphorus, and sodium to help support cats with advanced (IRIS Stage 3-4) kidney disease.",
+        "key_features": [
+            "Restricted in protein, phosphorus, and sodium",
+            "High-quality protein, providing essential amino acids for the maintenance of strong muscle mass",
+            "Enriched in vitamin E and omega-3 fatty acids (EPA/DHA/DPA)",
+            "Recommended best for advanced kidney disease (IRIS Stage 3-4) and heart disease",
+            "Completely balanced for long term feeding under veterinary supervision",
+            "No preservatives"
         ],
-        "crude_fat": [
-            "5.0% (min)",
-            "14.0%"
-        ],
-        "crude_fiber": [
-            "0.1% (max)",
-            "0.18%"
-        ],
-        "moisture": [
-            "64.5% (max)",
-            null
-        ],
-        "phosphorous": [
-            null,
-            "0.25%"
-        ],
-        "sodium": [
-            null,
-            "0.14%"
-        ],
-        "potassium": [
-            null,
-            "0.52%"
-        ]
+        "ingredients": "Dark Meat Chicken, Chicken Liver, Chicken Heart, Pasta, Chicken Fat + Premium Fish Oil, Vitamin & Mineral Supplements",
+        "nutrition_facts": {
+            "crude_protein": [
+                "13.2% (min)",
+                "30.0%"
+            ],
+            "crude_fat": [
+                "13.2% (min)",
+                "30.0%"
+            ],
+            "crude_fiber": [
+                "0.9% (max)",
+                "2.1%"
+            ],
+            "moisture": [
+                "56.0% (max)",
+                null
+            ],
+            "phosphorous": [
+                null,
+                "0.26%"
+            ],
+            "sodium": [
+                null,
+                "0.12%"
+            ],
+            "potassium": [
+                null,
+                "1.32%"
+            ]
+        },
+        "nutritional_adequacy_statement": "Advanced Kidney Care Diet is intended for management of advanced kidney disease.  Use under direct instruction or supervision of a veterinarian."
     },
-    "nutritional_adequacy_statement": "Advanced Kidney Care Diet is intended for management of advanced kidney diseases.  Use under direct instruction or supervision of a veterinarian."
+    "variants": [
+        {
+            "id": 32204998574158,
+            "title": "8",
+            "price": 38.96,
+            "weight": 0.0,
+            "weight_unit": "lb",
+            "created_at": "2020-05-18T16:51:45.000000",
+            "updated_at": "2020-05-21T02:31:01.000000"
+        },
+        {
+            "id": 32204998606926,
+            "title": "13",
+            "price": 45.96,
+            "weight": 0.0,
+            "weight_unit": "lb",
+            "created_at": "2020-05-18T16:51:45.000000",
+            "updated_at": "2020-05-21T02:34:39.000000"
+        },
+        {
+            "id": 32204998639694,
+            "title": "25",
+            "price": 53.96,
+            "weight": 0.0,
+            "weight_unit": "lb",
+            "created_at": "2020-05-18T16:51:45.000000",
+            "updated_at": "2020-05-21T02:31:01.000000"
+        }
+    ],
+    "created_at": "2020-03-17T23:48:28.000000",
+    "updated_at": "2020-09-06T17:46:40.000000"
 }
 ```
 
@@ -1384,43 +1590,28 @@ Example: `/v1/product?product-type=feline`
 * `404` if not found
 
 
-### Get a list of product variants
+### Get customized product list
 
 **GET:**
 ```
-/v1/product/:product_id/variant
+/v1/product/recommendation/:product_type
 ```
 
-**Query Params:**
-* `weight`: integer, the weight of the pet in lbs
-
-Example: `/v1/product/4590004666446/variant?weight=10`
-
-
 **Notes:**
-* The `weight` query param is needed in order to select the corresponding variant for the pet. 
-* If `weight` is not specified, all product variants will be returned. 
+* Returns products in a particular order to be featured on the home page
+ 
 
 **Response:**
 ```json
 [
     {
-        "id": 32204975734862,
-        "title": "10",
-        "price": 36.49,
-        "weight": 0.0,
-        "weight_unit": "lb",
-        "created_at": "2020-05-18T16:45:24.000000",
-        "updated_at": "2020-05-18T16:47:58.000000"
-    },
-    {
-        "id": 32204975767630,
-        "title": "20",
-        "price": 45.49,
-        "weight": 0.0,
-        "weight_unit": "lb",
-        "created_at": "2020-05-18T16:45:24.000000",
-        "updated_at": "2020-05-18T16:47:26.000000"
+        "id": 4590009417806,
+        "title": "Advanced Kidney Care",
+        "product_type": "feline",
+        "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/example_diet_981d44f3-e9de-468d-b76c-285b185ee29b.png?v=1587915980",
+        "is_prescription": true,
+        "created_at": "2020-03-17T23:48:28.000000",
+        "updated_at": "2020-09-04T02:56:14.000000"
     },
     ...
 ]
@@ -1428,7 +1619,6 @@ Example: `/v1/product/4590004666446/variant?weight=10`
 
 **Status Codes:**
 * `200` if successful
-* `400` if query params are not correct type
 
 
 ### Get product recommendations
@@ -1480,6 +1670,9 @@ Example: `/v1/product/recommendation/canine?general=vomiting&general=diarrhea&me
     ]
 }
 ```
+
+**Status Codes:**
+* `200` if successful
 
 
 ### Create a subscription
