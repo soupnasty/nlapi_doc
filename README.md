@@ -1403,85 +1403,76 @@ Example: `/v1/product?product-type=feline`
 ```json
 [
     {
-        "id": 4590009417806,
-        "title": "Advanced Kidney Care",
+        "id": 4590007484494,
+        "title": "Allergy Care - Salmon",
         "product_type": "feline",
-        "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/example_diet_981d44f3-e9de-468d-b76c-285b185ee29b.png?v=1587915980",
-        "is_prescription": true,
+        "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/example_diet_631e32cc-1902-497d-8839-91770521c2ff.png?v=1587916180",
+        "is_prescription": false,
         "detail": {
-            "general_description": "A diet low in protein, phosphorus, and sodium to help support cats with advanced (IRIS Stage 3-4) kidney disease.",
+            "general_description": "An adult maintenance diet rich in natural omega-3 fatty acids and hypoallergenic ingredients designed to help maintain your cat's healthy skin & hair, best suited for cats with food allergies.",
             "key_features": [
-                "Restricted in protein, phosphorus, and sodium",
-                "High-quality protein, providing essential amino acids for the maintenance of strong muscle mass",
-                "Enriched in vitamin E and omega-3 fatty acids (EPA/DHA/DPA)",
-                "Recommended best for advanced kidney disease (IRIS Stage 3-4) and heart disease",
-                "Completely balanced for long term feeding under veterinary supervision",
+                "High-quality, lean protein",
+                "Single source selected protein and carbohydrate ingredients",
+                "Low in carbohydrates and excellent palatability",
+                "Natural source of Vitamin E, and omega-3 fatty acids for skin nourishment",
                 "No preservatives"
             ],
-            "ingredients": "Dark Meat Chicken, Chicken Liver, Chicken Heart, Pasta, Chicken Fat + Premium Fish Oil, Vitamin & Mineral Supplements",
-            "nutrition_facts": {
-                "crude_protein": [
-                    "13.2% (min)",
-                    "30.0%"
+            "ingredients": "Salmon, Mackerel, Sweet Potato, Olive Oil + Vitamin & Mineral Supplements",
+            "nutrition_facts": [
+                [
+                    "Crude Protein",
+                    "20.4% (min)",
+                    "51.2%"
                 ],
-                "crude_fat": [
-                    "13.2% (min)",
-                    "30.0%"
+                [
+                    "Crude Fat",
+                    "15.9% (min)",
+                    "39.9%"
                 ],
-                "crude_fiber": [
-                    "0.9% (max)",
-                    "2.1%"
+                [
+                    "Crude Fiber",
+                    "0.3% (max)",
+                    "0.6%"
                 ],
-                "moisture": [
-                    "56.0% (max)",
+                [
+                    "Moisture",
+                    "60.1% (max)",
                     null
-                ],
-                "phosphorous": [
-                    null,
-                    "0.26%"
-                ],
-                "sodium": [
-                    null,
-                    "0.12%"
-                ],
-                "potassium": [
-                    null,
-                    "1.32%"
                 ]
-            },
-            "nutritional_adequacy_statement": "Advanced Kidney Care Diet is intended for management of advanced kidney disease.  Use under direct instruction or supervision of a veterinarian."
+            ],
+            "nutritional_adequacy_statement": "High Cal – Beef & Salmon Diet is complete, well-balanced, and has been formulated to meet the nutritional levels established by the AAFCO Nutrient Profiles for maintenance of adult cat."
         },
         "variants": [
             {
-                "id": 32204998574158,
+                "id": 32221049061454,
                 "title": "8",
-                "price": 38.96,
+                "price": 36.49,
                 "weight": 0.0,
                 "weight_unit": "lb",
-                "created_at": "2020-05-18T16:51:45.000000",
-                "updated_at": "2020-05-21T02:31:01.000000"
+                "created_at": "2020-05-21T02:33:46.000000",
+                "updated_at": "2020-05-21T02:33:46.000000"
             },
             {
-                "id": 32204998606926,
+                "id": 32221049094222,
                 "title": "13",
-                "price": 45.96,
+                "price": 43.49,
                 "weight": 0.0,
                 "weight_unit": "lb",
-                "created_at": "2020-05-18T16:51:45.000000",
-                "updated_at": "2020-05-21T02:34:39.000000"
+                "created_at": "2020-05-21T02:33:46.000000",
+                "updated_at": "2020-05-21T02:34:24.000000"
             },
             {
-                "id": 32204998639694,
+                "id": 32221049126990,
                 "title": "25",
-                "price": 53.96,
+                "price": 51.49,
                 "weight": 0.0,
                 "weight_unit": "lb",
-                "created_at": "2020-05-18T16:51:45.000000",
-                "updated_at": "2020-05-21T02:31:01.000000"
+                "created_at": "2020-05-21T02:33:46.000000",
+                "updated_at": "2020-05-21T02:33:46.000000"
             }
         ],
-        "created_at": "2020-03-17T23:48:28.000000",
-        "updated_at": "2020-09-06T17:46:40.000000"
+        "created_at": "2020-03-17T23:41:13.000000",
+        "updated_at": "2020-07-28T03:11:28.000000"
     },
     ...
 ]
@@ -1502,85 +1493,76 @@ Example: `/v1/product?product-type=feline`
 **Response:**
 ```json
 {
-    "id": 4590009417806,
-    "title": "Advanced Kidney Care",
+    "id": 4590007484494,
+    "title": "Allergy Care - Salmon",
     "product_type": "feline",
-    "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/example_diet_981d44f3-e9de-468d-b76c-285b185ee29b.png?v=1587915980",
-    "is_prescription": true,
+    "image_src": "https://cdn.shopify.com/s/files/1/0279/8229/9214/products/example_diet_631e32cc-1902-497d-8839-91770521c2ff.png?v=1587916180",
+    "is_prescription": false,
     "detail": {
-        "general_description": "A diet low in protein, phosphorus, and sodium to help support cats with advanced (IRIS Stage 3-4) kidney disease.",
+        "general_description": "An adult maintenance diet rich in natural omega-3 fatty acids and hypoallergenic ingredients designed to help maintain your cat's healthy skin & hair, best suited for cats with food allergies.",
         "key_features": [
-            "Restricted in protein, phosphorus, and sodium",
-            "High-quality protein, providing essential amino acids for the maintenance of strong muscle mass",
-            "Enriched in vitamin E and omega-3 fatty acids (EPA/DHA/DPA)",
-            "Recommended best for advanced kidney disease (IRIS Stage 3-4) and heart disease",
-            "Completely balanced for long term feeding under veterinary supervision",
+            "High-quality, lean protein",
+            "Single source selected protein and carbohydrate ingredients",
+            "Low in carbohydrates and excellent palatability",
+            "Natural source of Vitamin E, and omega-3 fatty acids for skin nourishment",
             "No preservatives"
         ],
-        "ingredients": "Dark Meat Chicken, Chicken Liver, Chicken Heart, Pasta, Chicken Fat + Premium Fish Oil, Vitamin & Mineral Supplements",
-        "nutrition_facts": {
-            "crude_protein": [
-                "13.2% (min)",
-                "30.0%"
+        "ingredients": "Salmon, Mackerel, Sweet Potato, Olive Oil + Vitamin & Mineral Supplements",
+        "nutrition_facts": [
+            [
+                "Crude Protein",
+                "20.4% (min)",
+                "51.2%"
             ],
-            "crude_fat": [
-                "13.2% (min)",
-                "30.0%"
+            [
+                "Crude Fat",
+                "15.9% (min)",
+                "39.9%"
             ],
-            "crude_fiber": [
-                "0.9% (max)",
-                "2.1%"
+            [
+                "Crude Fiber",
+                "0.3% (max)",
+                "0.6%"
             ],
-            "moisture": [
-                "56.0% (max)",
+            [
+                "Moisture",
+                "60.1% (max)",
                 null
-            ],
-            "phosphorous": [
-                null,
-                "0.26%"
-            ],
-            "sodium": [
-                null,
-                "0.12%"
-            ],
-            "potassium": [
-                null,
-                "1.32%"
             ]
-        },
-        "nutritional_adequacy_statement": "Advanced Kidney Care Diet is intended for management of advanced kidney disease.  Use under direct instruction or supervision of a veterinarian."
+        ],
+        "nutritional_adequacy_statement": "High Cal – Beef & Salmon Diet is complete, well-balanced, and has been formulated to meet the nutritional levels established by the AAFCO Nutrient Profiles for maintenance of adult cat."
     },
     "variants": [
         {
-            "id": 32204998574158,
+            "id": 32221049061454,
             "title": "8",
-            "price": 38.96,
+            "price": 36.49,
             "weight": 0.0,
             "weight_unit": "lb",
-            "created_at": "2020-05-18T16:51:45.000000",
-            "updated_at": "2020-05-21T02:31:01.000000"
+            "created_at": "2020-05-21T02:33:46.000000",
+            "updated_at": "2020-05-21T02:33:46.000000"
         },
         {
-            "id": 32204998606926,
+            "id": 32221049094222,
             "title": "13",
-            "price": 45.96,
+            "price": 43.49,
             "weight": 0.0,
             "weight_unit": "lb",
-            "created_at": "2020-05-18T16:51:45.000000",
-            "updated_at": "2020-05-21T02:34:39.000000"
+            "created_at": "2020-05-21T02:33:46.000000",
+            "updated_at": "2020-05-21T02:34:24.000000"
         },
         {
-            "id": 32204998639694,
+            "id": 32221049126990,
             "title": "25",
-            "price": 53.96,
+            "price": 51.49,
             "weight": 0.0,
             "weight_unit": "lb",
-            "created_at": "2020-05-18T16:51:45.000000",
-            "updated_at": "2020-05-21T02:31:01.000000"
+            "created_at": "2020-05-21T02:33:46.000000",
+            "updated_at": "2020-05-21T02:33:46.000000"
         }
     ],
-    "created_at": "2020-03-17T23:48:28.000000",
-    "updated_at": "2020-09-06T17:46:40.000000"
+    "created_at": "2020-03-17T23:41:13.000000",
+    "updated_at": "2020-07-28T03:11:28.000000"
 }
 ```
 
@@ -1920,21 +1902,46 @@ is canceled, this will terminate the subscription automatically.
 	"first_name": "Kobe",
 	"last_name": "Bryant",
 	"phone": "555-555-5555",
-	"email": "black.mamba@gmail.com"
+	"email": "black.mamba@gmail.com",
+	"pet_ids": [624542287671609]
 }
 ```
 
 **Response:**
 ```json
 {
-    "id": 820841247248408,
-    "clinic": "Mambarrific Clinic",
+	"id": 361492043745392,
+    "clinic": "Kobes Amazing Clinic",
     "first_name": "Kobe",
     "last_name": "Bryant",
     "phone": "555-555-5555",
-    "email": "black.mamba@gmail.com",
-    "created_at": "2020-07-21T23:15:27.876643",
-    "updated_at": "2020-07-21T23:15:27.876646"
+	"email": "black.mamba@gmail.com",
+    "pets": [
+        {
+            "id": 624542287671609,
+            "name": "Zino",
+            "pet_type": "feline",
+            "gender": "female",
+            "breed": "",
+            "weight": 10,
+            "age": 8,
+            "activity_level": "low",
+            "body_level": "very_large",
+            "living_environment": "mostly_indoors",
+            "health_tags": [
+                "obesity",
+                "food_allergy"
+            ],
+            "other_tags": [
+                "depression"
+            ],
+            "is_neutered": true,
+            "created_at": "2020-09-04T02:37:53.147835",
+            "updated_at": "2020-09-04T02:37:53.147839"
+        }
+    ],
+    "created_at": "2020-09-12T16:36:48.369183",
+    "updated_at": "2020-09-12T16:39:58.774440"
 }
 ```
 
@@ -1955,15 +1962,40 @@ is canceled, this will terminate the subscription automatically.
 ```json
 [
     {
-        "id": 820841247248408,
+        "id": 361492043745392,
         "clinic": "Kobes Amazing Clinic",
         "first_name": "Kobe",
         "last_name": "Bryant",
         "phone": "555-555-5555",
-        "email": "black.mamba@gmail.com",
-        "created_at": "2020-07-21T23:15:27.876643",
-        "updated_at": "2020-07-21T23:15:27.876646"
-    }
+	    "email": "black.mamba@gmail.com",
+        "pets": [
+            {
+                "id": 624542287671609,
+                "name": "Zino",
+                "pet_type": "feline",
+                "gender": "female",
+                "breed": "",
+                "weight": 10,
+                "age": 8,
+                "activity_level": "low",
+                "body_level": "very_large",
+                "living_environment": "mostly_indoors",
+                "health_tags": [
+                    "obesity",
+                    "food_allergy"
+                ],
+                "other_tags": [
+                    "depression"
+                ],
+                "is_neutered": true,
+                "created_at": "2020-09-04T02:37:53.147835",
+                "updated_at": "2020-09-04T02:37:53.147839"
+            }
+        ],
+        "created_at": "2020-09-12T16:36:48.369183",
+        "updated_at": "2020-09-12T16:39:58.774440"
+    },
+    ...
 ]
 ```
 
@@ -1983,14 +2015,38 @@ is canceled, this will terminate the subscription automatically.
 **Response:**
 ```json
 {
-    "id": 820841247248408,
+	"id": 361492043745392,
     "clinic": "Kobes Amazing Clinic",
     "first_name": "Kobe",
     "last_name": "Bryant",
     "phone": "555-555-5555",
-    "email": "black.mamba@gmail.com",
-    "created_at": "2020-07-21T23:15:27.876643",
-    "updated_at": "2020-07-21T23:15:27.876646"
+	"email": "black.mamba@gmail.com",
+    "pets": [
+        {
+            "id": 624542287671609,
+            "name": "Zino",
+            "pet_type": "feline",
+            "gender": "female",
+            "breed": "",
+            "weight": 10,
+            "age": 8,
+            "activity_level": "low",
+            "body_level": "very_large",
+            "living_environment": "mostly_indoors",
+            "health_tags": [
+                "obesity",
+                "food_allergy"
+            ],
+            "other_tags": [
+                "depression"
+            ],
+            "is_neutered": true,
+            "created_at": "2020-09-04T02:37:53.147835",
+            "updated_at": "2020-09-04T02:37:53.147839"
+        }
+    ],
+    "created_at": "2020-09-12T16:36:48.369183",
+    "updated_at": "2020-09-12T16:39:58.774440"
 }
 ```
 
@@ -2017,14 +2073,38 @@ is canceled, this will terminate the subscription automatically.
 **Response:**
 ```json
 {
-    "id": 820841247248408,
+	"id": 361492043745392,
     "clinic": "Kobes Amazing Clinic",
     "first_name": "Kobe",
     "last_name": "Bryant",
     "phone": "123-456-7890",
-    "email": "black.mamba@gmail.com",
-    "created_at": "2020-07-21T23:15:27.876643",
-    "updated_at": "2020-07-21T23:17:41.207232"
+	"email": "black.mamba@gmail.com",
+    "pets": [
+        {
+            "id": 624542287671609,
+            "name": "Zino",
+            "pet_type": "feline",
+            "gender": "female",
+            "breed": "",
+            "weight": 10,
+            "age": 8,
+            "activity_level": "low",
+            "body_level": "very_large",
+            "living_environment": "mostly_indoors",
+            "health_tags": [
+                "obesity",
+                "food_allergy"
+            ],
+            "other_tags": [
+                "depression"
+            ],
+            "is_neutered": true,
+            "created_at": "2020-09-04T02:37:53.147835",
+            "updated_at": "2020-09-04T02:37:53.147839"
+        }
+    ],
+    "created_at": "2020-09-12T16:36:48.369183",
+    "updated_at": "2020-09-12T16:39:58.774440"
 }
 ```
 
